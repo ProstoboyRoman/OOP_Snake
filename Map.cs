@@ -23,45 +23,53 @@ namespace OOP_Snake
         {
 
             // First Lin
-            Console.SetCursorPosition(X +1, Y);
-            for (int i = 0; i < Width - 2; i++)
+            Console.SetCursorPosition(X, Y);
+            Console.Write("G");
+            for (int i = 0; i < Width; i++)
             {
                 Console.Write("=");
             }
-            // Mini Menu Lin
+            Console.Write("G");
 
+            // Mini Menu Lin
             Console.SetCursorPosition(X, Y + 1);
             Console.WriteLine("S");
-            Console.SetCursorPosition(X + Width -1, Y + 1);
+            Console.SetCursorPosition(X + Width +1, Y + 1);
             Console.WriteLine("S");
 
 
-            Console.SetCursorPosition(X + 1, Y + 2);
-            for (int i = 0; i < Width - 2; i++)
+            Console.SetCursorPosition(X, Y + 2);
+            Console.Write("T");
+            for (int i = 0; i < Width; i++)
             {
                 Console.Write("=");
             }
+            Console.Write("T");
 
 
             // Sides
-            for (int i = 0; i < Height - 3; i++)
+            for (int i = 0; i < Height; i++)
             {
-                Console.SetCursorPosition(X, Y+i + 3);
+                Console.SetCursorPosition(X, Y + i + 3);
                 Console.WriteLine("S");
 
-                Console.SetCursorPosition(X + Width - 1, Y + i + 3);
+                Console.SetCursorPosition(X + Width + 1, Y + i + 3);
                 Console.WriteLine("S");
             }
 
 
 
             //last Lin
-            Console.SetCursorPosition(X + 1, Y + Height);
-            for (int i = 0; i < Width - 2; i++)
+            Console.SetCursorPosition(X, Y + Height +3);
+            Console.Write("G");
+            for (int i = 0; i < Width; i++)
             {
                 Console.Write("=");
             }
+            Console.Write("G");
 
+            Console.SetCursorPosition(X + 2, Y + 1);
+            Console.WriteLine("Snake Game");
         }
     }
 }

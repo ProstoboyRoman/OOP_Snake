@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,16 @@ namespace OOP_Snake
     internal class Program
     {
         static private int StartMenu = 0;
+        
         static void Main(string[] args)
         {
 
             Start_Menu.Setup(2, 1);
-            Map.Setup(10, 5, 10, 10);
+            Map.Setup(10, 5, 40, 10);
+
+            Snake S1 = new Snake();
+
+            bool GameInit = true;
 
             while (true)
             {
@@ -36,7 +42,20 @@ namespace OOP_Snake
                 while (StartMenu == 1)
                 {
                     //Game
-                    Map.DrawMap();
+
+                    if (GameInit)
+                    {
+                        Map.DrawMap();
+                        S1.AddSnakeBody();
+
+                        GameInit = false;
+                    }
+
+
+                    S1.DrawSnake();
+                    S1.MoveSnake();
+
+
                 }
                 
             }
