@@ -51,9 +51,11 @@ namespace OOP_Snake
                         GameInit = false;
                     }
 
-
+                    Map.DellGameScreen();
                     S1.DrawSnake();
                     S1.MoveSnake();
+                    System.Threading.Thread.Sleep(2000);
+
 
 
                 }

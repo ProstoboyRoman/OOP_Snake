@@ -71,5 +71,18 @@ namespace OOP_Snake
             Console.SetCursorPosition(X + 2, Y + 1);
             Console.WriteLine("Snake Game");
         }
+        static public void DellGameScreen()
+        {
+            
+            for (int i = 0; i < Height; i++)
+            {
+                Console.SetCursorPosition(X +1, Y + i + 3);
+                for (int j = 0; j < Width; j++)
+                {
+                    Console.Write(" ");
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }

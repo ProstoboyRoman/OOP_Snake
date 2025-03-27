@@ -22,12 +22,13 @@ namespace OOP_Snake
             RIGHT
         }
         
-        private Dir myDir = Dir.UP;
+        private Dir myDir = Dir.LEFT;
 
         public void AddSnakeBody()
         {
             mySnake.Add(P1);
             mySnake.Add(new Point(P1.X, P1.Y + 1));
+            mySnake.Add(new Point(P1.X, P1.Y + 2));
         }
 
 
@@ -37,19 +38,44 @@ namespace OOP_Snake
 
             foreach (var item in mySnake)
             {
-                Console.SetCursorPosition(item.X, item.Y);
-                Console.Write("A");
+                if (item == mySnake[0])
+                {
+                    Console.SetCursorPosition(item.X, item.Y);
+                    Console.Write("@");
+                }
+                else
+                {
+                    Console.SetCursorPosition(item.X, item.Y);
+                    Console.Write("A");
+                }
+                
             }
 
         }
 
         public void MoveSnake()
         {
-            if (true)
+            if (myDir == Dir.UP)
             {
-                mySnake.Add(new Point(mySnake[0].X, mySnake[0].Y + 1));
-                //mySnake.RemoveAt(mySnake.Count -1);
-            }  
+                mySnake.Insert(0, new Point(mySnake[0].X, mySnake[0].Y - 1));
+            }
+            else if (myDir == Dir.DOWN)
+            {
+                mySnake.Insert(0, new Point(mySnake[0].X, mySnake[0].Y + 1));
+            }
+            else if (myDir == Dir.LEFT)
+            {
+                mySnake.Insert(0, new Point(mySnake[0].X - 1, mySnake[0].Y));
+            }
+            else if (myDir == Dir.RIGHT)
+            {
+                mySnake.Insert(0, new Point(mySnake[0].X + 1, mySnake[0].Y));
+            }
+            mySnake.RemoveAt(mySnake.Count - 1);
+        }
+
+        public void UserInput()
+        {
         }
     }
 }
