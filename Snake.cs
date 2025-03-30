@@ -22,7 +22,9 @@ namespace OOP_Snake
             RIGHT
         }
         
-        private Dir myDir = Dir.LEFT;
+        private Dir myDir = Dir.STOP;
+
+        private Dir LastDir = Dir.STOP;
 
         public void AddSnakeBody()
         {
@@ -71,11 +73,33 @@ namespace OOP_Snake
             {
                 mySnake.Insert(0, new Point(mySnake[0].X + 1, mySnake[0].Y));
             }
-            mySnake.RemoveAt(mySnake.Count - 1);
+
+            if (myDir != Dir.STOP)
+                mySnake.RemoveAt(mySnake.Count - 1);
         }
 
-        public void UserInput()
+        public void UserInput() 
         {
+            if (Console.KeyAvailable)
+            {
+                ConsoleKeyInfo key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.LeftArrow && myDir != Dir.LEFT)
+                {
+                    myDir = Dir.LEFT;
+                }
+                else if (key.Key == ConsoleKey.RightArrow && myDir != Dir.RIGHT)
+                {
+                    myDir = Dir.RIGHT;
+                }
+                else if (key.Key == ConsoleKey.UpArrow && myDir != Dir.UP)
+                {
+                    myDir = Dir.UP;
+                }
+                else if (key.Key == ConsoleKey.DownArrow && myDir != Dir.DOWN)
+                {
+                    myDir = Dir.DOWN;
+                }
+            }
         }
     }
 }
