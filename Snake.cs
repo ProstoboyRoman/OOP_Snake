@@ -13,6 +13,8 @@ namespace OOP_Snake
 
         List<Point> mySnake = new List<Point>();
 
+        private int counter = 0; 
+
         enum Dir
         {
             STOP,
@@ -55,13 +57,15 @@ namespace OOP_Snake
 
         }
 
-        public void MoveSnake()
+        public void MoveSnake(bool RemoveLast)
         {
-            if (myDir == Dir.UP)
+            counter ++;
+
+            if (myDir == Dir.UP && counter % 2 == 0)
             {
                 mySnake.Insert(0, new Point(mySnake[0].X, mySnake[0].Y - 1));
             }
-            else if (myDir == Dir.DOWN)
+            else if (myDir == Dir.DOWN && counter % 2 == 0)
             {
                 mySnake.Insert(0, new Point(mySnake[0].X, mySnake[0].Y + 1));
             }
@@ -74,8 +78,18 @@ namespace OOP_Snake
                 mySnake.Insert(0, new Point(mySnake[0].X + 1, mySnake[0].Y));
             }
 
-            if (myDir != Dir.STOP)
-                mySnake.RemoveAt(mySnake.Count - 1);
+            // Remove Last Teail 
+            if (RemoveLast)
+            {
+                return;
+            }
+            else
+            {
+                if (myDir != Dir.STOP && (myDir != Dir.UP && myDir != Dir.DOWN))
+                    mySnake.RemoveAt(mySnake.Count - 1);
+                else if ((myDir == Dir.UP || myDir == Dir.DOWN) && counter % 2 == 0)
+                    mySnake.RemoveAt(mySnake.Count - 1);
+            }
         }
 
         public void UserInput() 
@@ -100,6 +114,33 @@ namespace OOP_Snake
                     myDir = Dir.DOWN;
                 }
             }
+        }
+
+        public void CeckMapColision (int X, int Y, int Width, int Height)
+        {
+            if ((mySnake[0].X <= X + 1 && myDir == Dir.LEFT) || (mySnake[0].X >= X + Width && myDir == Dir.RIGHT))
+            {
+                myDir = Dir.STOP;
+            }
+            else if ((mySnake[0].Y <= Y + 3 && myDir == Dir.UP) || (mySnake[0].Y >= Y + 2 + Height && myDir == Dir.DOWN))
+            {
+                myDir = Dir.STOP;
+            }
+
+        }
+
+        public void CheckSelfColision()
+        {
+            // Cant check without fruits
+        }
+
+        public bool CheckFruit(Fruit myFruit)
+        {
+            if (mySnake[0].X == myFruit.X && mySnake[0].Y == myFruit.Y)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

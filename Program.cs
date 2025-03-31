@@ -11,12 +11,14 @@ namespace OOP_Snake
     internal class Program
     {
         private static Snake S1;
+        private static Fruit F1;
         static private int StartMenu = 0;
-        static private Timer timer = new Timer(200);
+        static private Timer timer = new Timer(400);
 
-
+        static private int Xof = 10,Yof = 5, Width = 40, Height = 10;
 
         static bool GameInit = true;
+        static bool ateFruit = false;
 
         static void Main(string[] args)
         {
@@ -52,9 +54,7 @@ namespace OOP_Snake
                     Start_Menu.DellScreen();
                     timer.Enabled = true;
                     StartMenu = 3;
-
                 }
-
             }
 
         }
@@ -64,22 +64,30 @@ namespace OOP_Snake
             {
                 S1 = new Snake();
                 S1.AddSnakeBody();
-                Map.Setup(10, 5, 40, 10);
+                Map.Setup(Xof, Yof, Width, Height);
                 Map.DrawMap();
 
-
+                F1 = new Fruit();
+                F1.initFruit(Xof, Yof, Width, Height);
                 GameInit = false;
             }
 
 
             Map.DellGameScreen();
             S1.DrawSnake();
-
-
+            F1.DrawFruit();
+            S1.CeckMapColision(Xof, Yof, Width, Height);
             S1.UserInput();
-            S1.MoveSnake();
-            
 
+            ateFruit = S1.CheckFruit(F1);
+
+            S1.MoveSnake(ateFruit);
+            if (ateFruit)
+            {
+                F1.initFruit(Xof, Yof, Width, Height);
+                ateFruit = false;
+            }
+            
         }
         static void SetupTimer()
         {
